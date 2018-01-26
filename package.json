@@ -1,0 +1,24 @@
+{
+  "name": "laba2-4235",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ExpressTutorial",
+  "main": "expresstut.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicosantarin/LabA2-4235.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicosantarin/LabA2-4235/issues"
+  },
+  "homepage": "https://github.com/nicosantarin/LabA2-4235#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "express-handlebars": "^3.0.0"
+  }
+}
