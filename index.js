@@ -41,35 +41,31 @@ app.set('port', process.env.PORT || 3000);
 
 app.use(express.static(__dirname + '/public'));
 
-app.use(router);
+app.use('/', router);
 
 //middleware bodyparser
 router.use(bodyParser.json())
-
-
-
-//routes for lab 2
-// app.get('/', function(req, res){
-//   // Point at the home.handlebars view
-//   res.render('home');
-// });
+ 
 
 // lab 3 route
 router.get('/', (req, res) => {
-  res.render('home')
+  res.render('home') 
 });
 // go realtime > show
-router.get('/realtime', realtimeRoute )
+router.use('/realtime', realtimeRoute )
 realtimeRoute.get('/show', (req, res) => {
-  res.send('hello paul')
-  // res.render('realtimep')
+  
+   res.render('realtimep')
 });
-
+ 
 realtimeRoute.get('/data', (req, res) => {
-  res.send('hello paul')
-  // res.render
-});
-
+  
+var text = fs.readFileSync('./mydatabase.json','utf8')
+text = JSON.parse(text)
+console.log (typeof text)
+res.send(text)
+})
+ 
 // //middleware example
 // app.use(function(req, res, next){
 //   console.log('Looking for URL : ' + req.url);
@@ -91,13 +87,6 @@ realtimeRoute.get('/data', (req, res) => {
 
 
 
-//define about route
-app.get('/about', function(req, res){
-  // Point at the about.handlebars view
-  res.render('about');
-});
-
-
 
 
 
@@ -112,15 +101,18 @@ app.get('/about', function(req, res){
 // // Point to 404.handlebars view
 //   res.render('404');
 // });
+// // Custom 500 Page
+// app.use(function(err, req, res, next) {
+//   console.error(err.stack);
+//   res.status(500);
+// // Point to 500.handlebars view
+//   res.render('500');
+// });
 
 
-// Custom 500 Page
-app.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.status(500);
-// Point to 500.handlebars view
-  res.render('500');
-});
+
+
+
 
 
 
