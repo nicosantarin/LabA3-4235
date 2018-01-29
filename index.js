@@ -6,11 +6,15 @@
 // you haven't defined any routes
 // Import the express module
 var express = require('express');
- 
 var app = express();
+
+var router = express.Router()
+var realtimeRoute = express.Router()
 
 app.disable('x-powered-by');
 
+
+var bodyParser = require('body-parser'); 
 
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 
@@ -37,13 +41,33 @@ app.set('port', process.env.PORT || 3000);
 
 app.use(express.static(__dirname + '/public'));
 
+app.use(router);
+
+//middleware bodyparser
+router.use(bodyParser.json())
 
 
 
-//routes
-app.get('/', function(req, res){
-  // Point at the home.handlebars view
-  res.render('home');
+//routes for lab 2
+// app.get('/', function(req, res){
+//   // Point at the home.handlebars view
+//   res.render('home');
+// });
+
+// lab 3 route
+router.get('/', (req, res) => {
+  res.render('home')
+});
+// go realtime > show
+router.get('/realtime', realtimeRoute )
+realtimeRoute.get('/show', (req, res) => {
+  res.send('hello paul')
+  // res.render('realtimep')
+});
+
+realtimeRoute.get('/data', (req, res) => {
+  res.send('hello paul')
+  // res.render
 });
 
 // //middleware example
@@ -64,6 +88,9 @@ app.get('/', function(req, res){
 // });
 
 
+
+
+
 //define about route
 app.get('/about', function(req, res){
   // Point at the about.handlebars view
@@ -77,14 +104,14 @@ app.get('/about', function(req, res){
 
 // Defines a custom 404 Page and we use app.use because
 // the request didn't match a route (Must follow the routes)
-app.use(function(req, res) {
-  // Define the content type
-  res.type('text/html');
-// The default status is 200
-  res.status(404);
-// Point to 404.handlebars view
-  res.render('404');
-});
+// app.use(function(req, res) {
+//   // Define the content type
+//   res.type('text/html');
+// // The default status is 200
+//   res.status(404);
+// // Point to 404.handlebars view
+//   res.render('404');
+// });
 
 
 // Custom 500 Page
