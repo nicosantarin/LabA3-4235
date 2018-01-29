@@ -27,7 +27,7 @@ var fs = require('file-system');
 
 //using RESTful
 //routing request to add user
-app.post('/users/:userid',1001);
+//app.post('/users/:userid',1001);
 
 
 
@@ -46,22 +46,22 @@ app.get('/', function(req, res){
   res.render('home');
 });
 
-//middleware example
-app.use(function(req, res, next){
-  console.log('Looking for URL : ' + req.url);
-  next();
-});
-//middleware report and throw errors
-app.get('/junk', function(req, res, next){
-  console.log('Tried to access /junk');
-  throw new Error('/junk does\'t exist');
-});
+// //middleware example
+// app.use(function(req, res, next){
+//   console.log('Looking for URL : ' + req.url);
+//   next();
+// });
+// //middleware report and throw errors
+// app.get('/junk', function(req, res, next){
+//   console.log('Tried to access /junk');
+//   throw new Error('/junk does\'t exist');
+// });
 // Catches the error and logs it and then continues
 // down the pipeline
-app.use(function(err, req, res, next){
-  console.log('Error : ' + err.message);
-  next();
-});
+// app.use(function(err, req, res, next){
+//   console.log('Error : ' + err.message);
+//   next();
+// });
 
 
 //define about route
