@@ -11,14 +11,23 @@ var app = express();
 
 app.disable('x-powered-by');
 
+
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
 
+//imported filesystem
+var fs = require('file-system');
+ 
+// fs.mkdir('1/2/3/4/5', [0o777], function(err) {});
+// fs.mkdirSync('1/2/3/4/5', [0o777]);
+// fs.writeFile('path/test.txt', 'aaa', function(err) {})
 
-
+//using RESTful
+//routing request to add user
+app.post('/users/:userid',1001);
 
 
 
