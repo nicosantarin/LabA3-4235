@@ -10,6 +10,7 @@ var app = express();
 
 var router = express.Router()
 var realtimeRoute = express.Router()
+var controlRoute = express.Router()
 
 app.disable('x-powered-by');
 
@@ -51,6 +52,7 @@ router.use(bodyParser.json())
 router.get('/', (req, res) => {
   res.render('home') 
 });
+
 // go realtime > show
 router.use('/realtime', realtimeRoute )
 realtimeRoute.get('/show', (req, res) => {
@@ -58,6 +60,7 @@ realtimeRoute.get('/show', (req, res) => {
    res.render('realtimep')
 });
  
+ //access /realtime/data
 realtimeRoute.get('/data', (req, res) => {
   
 var text = fs.readFileSync('./mydatabase.json','utf8')
@@ -65,7 +68,16 @@ text = JSON.parse(text)
 console.log (typeof text)
 res.send(text)
 })
+
+
+//go to users control.
+router.use('/users', controlRoute )
+controlRoute.get('/control', (req, res) => {
+
+	res.render('usersp')
+});
  
+
 // //middleware example
 // app.use(function(req, res, next){
 //   console.log('Looking for URL : ' + req.url);
