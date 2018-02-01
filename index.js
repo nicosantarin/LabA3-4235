@@ -22,10 +22,28 @@ var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
-
 //imported filesystem
 var fs = require('file-system');
  
+ // random num generator
+ var rNum = Math.floor((Math.random() * 999) + 1);
+ let rData = {  
+    data: rNum
+};
+//write to json
+let data = JSON.stringify(rData);  
+fs.writeFileSync('./realtimedb.json', data);  
+
+
+ //global variable of json
+app.locals.realtimedbObj = require('./realtimedb.json')
+
+
+
+
+
+
+
 // fs.mkdir('1/2/3/4/5', [0o777], function(err) {});
 // fs.mkdirSync('1/2/3/4/5', [0o777]);
 // fs.writeFile('path/test.txt', 'aaa', function(err) {})
@@ -65,28 +83,19 @@ realtimeRoute.get('/show', (req, res) => {
  //access /realtime/data
 realtimeRoute.get('/data', (req, res) => {
 
-// app.get('/realtime/data', function(req, res){
- 	rNum = Math.floor((Math.random() * 999) + 1);
-// 	res.json({"data": rNum });
-// });
+ 	
+// let rData = {  
+//     data: rNum
+// };
 
-let rData = {  
-    data: rNum
-};
+// let data = JSON.stringify(rData);  
+// fs.writeFileSync('./realtimedb.json', data);  
 
-let data = JSON.stringify(rData);  
-fs.writeFileSync('./realtimedb.json', data);  
-
-
-  
+ 
 var text = fs.readFileSync('./realtimedb.json','utf8')
 text = JSON.parse(text)
 //console.log (typeof text)
 res.send(text)
-
-
-
-
 })
 
 
