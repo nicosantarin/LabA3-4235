@@ -30,9 +30,9 @@ var fs = require('file-system');
  let rData = {  
     data: rNum
 };
-//write to json
-let data = JSON.stringify(rData);  
-fs.writeFileSync('./realtimedb.json', data);  
+// //write to json
+// let data = JSON.stringify(rData);  
+// fs.writeFileSync('./realtimedb.json', data);  
 
 
  //global variable of json
@@ -76,7 +76,9 @@ router.get('/', (req, res) => {
 // go realtime > show
 router.use('/realtime', realtimeRoute )
 realtimeRoute.get('/show', (req, res) => {
-  
+  //write to json
+let data = JSON.stringify(rData);  
+fs.writeFileSync('./realtimedb.json', data);  
    res.render('realtimep')
 });
  
