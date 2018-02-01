@@ -33,8 +33,7 @@ var fs = require('file-system');
 //using RESTful
 //routing request to add user
 //app.post('/users/:userid',1001);
-
-
+ 
 
 //more imports
 //define port to run on
@@ -63,7 +62,7 @@ realtimeRoute.get('/show', (req, res) => {
  //access /realtime/data
 realtimeRoute.get('/data', (req, res) => {
   
-var text = fs.readFileSync('./mydatabase.json','utf8')
+var text = fs.readFileSync('./realtimedb.json','utf8')
 text = JSON.parse(text)
 console.log (typeof text)
 res.send(text)
@@ -105,14 +104,14 @@ controlRoute.get('/control', (req, res) => {
 
 // Defines a custom 404 Page and we use app.use because
 // the request didn't match a route (Must follow the routes)
-// app.use(function(req, res) {
-//   // Define the content type
-//   res.type('text/html');
-// // The default status is 200
-//   res.status(404);
-// // Point to 404.handlebars view
-//   res.render('404');
-// });
+app.use(function(req, res) {
+  // Define the content type
+  res.type('text/html');
+// The default status is 200
+  res.status(404);
+// Point to 404.handlebars view
+  res.render('404');
+});
 // // Custom 500 Page
 // app.use(function(err, req, res, next) {
 //   console.error(err.stack);
