@@ -52,6 +52,9 @@ router.get('/', (req, res) => {
   res.render('home') 
 });
 
+
+
+
 // go realtime > show
 router.use('/realtime', realtimeRoute )
 realtimeRoute.get('/show', (req, res) => {
@@ -61,12 +64,31 @@ realtimeRoute.get('/show', (req, res) => {
  
  //access /realtime/data
 realtimeRoute.get('/data', (req, res) => {
+
+// app.get('/realtime/data', function(req, res){
+ 	rNum = Math.floor((Math.random() * 999) + 1);
+// 	res.json({"data": rNum });
+// });
+
+let rData = {  
+    data: rNum
+};
+
+let data = JSON.stringify(rData);  
+fs.writeFileSync('./realtimedb.json', data);  
+
+
   
 var text = fs.readFileSync('./realtimedb.json','utf8')
 text = JSON.parse(text)
-console.log (typeof text)
+//console.log (typeof text)
 res.send(text)
+
+
+
+
 })
+
 
 
 //go to users control.
